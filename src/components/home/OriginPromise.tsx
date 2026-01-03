@@ -20,10 +20,10 @@ const promises = [
 
 export function OriginPromise() {
   return (
-    <section className="py-12 md:py-16 bg-eneera-cream">
+    <section className="py-14 md:py-20 bg-eneera-cream">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-10 md:mb-12">
           <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
             <span className="w-6 h-[1px] bg-primary" />
             Why ENEERA
@@ -35,11 +35,11 @@ export function OriginPromise() {
         </div>
 
         {/* Promise Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           {promises.map((promise, index) => (
             <div key={index} className="text-center group">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-background flex items-center justify-center shadow-soft group-hover:shadow-card transition-shadow duration-300">
-                <promise.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                <promise.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-serif text-lg text-foreground mb-2">
                 {promise.title}

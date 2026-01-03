@@ -15,6 +15,10 @@ import { VideoShowcase } from "@/components/home/VideoShowcase";
 import { PressMentions } from "@/components/home/PressMentions";
 import { CTASection } from "@/components/home/CTASection";
 import { DiscountPopup } from "@/components/ui/DiscountPopup";
+import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { FAQSection } from "@/components/home/FAQSection";
+import { IngredientsHighlight } from "@/components/home/IngredientsHighlight";
+import { StatsSection } from "@/components/home/StatsSection";
 
 const Index = () => {
   return (
@@ -24,16 +28,20 @@ const Index = () => {
       <HeroSection />
       <MarqueeBar />
       <TrustBadges />
+      <FeaturedProducts />
+      <StatsSection />
       <ProductShowcase />
       <OriginPromise />
       <ProcessSection />
-      <FeaturedProducts />
+      <IngredientsHighlight />
       <WhyLoveSection />
       <TestimonialsSection />
       <VideoShowcase />
       <CertificationBanner />
       <CategoryTabs />
+      <FAQSection />
       <PressMentions />
+      <NewsletterSection />
       <CTASection />
     </Layout>
   );

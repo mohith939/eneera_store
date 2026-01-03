@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { ArrowRight, Award, Shield, Leaf } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-eneera-cream via-background to-eneera-linen">
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-gradient-to-br from-eneera-cream via-background to-eneera-linen">
       {/* Decorative Elements */}
       <div 
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
           backgroundSize: '50px 50px',
@@ -13,46 +14,63 @@ export function HeroSection() {
       />
 
       {/* Main Content */}
-      <div className="container-wide relative z-10 pt-28 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="container-wide relative z-10 py-12 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Text Content */}
           <div className="text-center lg:text-left">
-            <span className="inline-block text-xs md:text-sm tracking-[0.2em] uppercase text-primary mb-6 font-medium">
+            <span className="inline-block text-xs tracking-[0.2em] uppercase text-primary mb-4 font-medium">
               Premium Organic Nutrition
             </span>
             
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-5">
               Built on 
               <span className="block text-primary">Purity,</span>
               Not Marketing.
             </h1>
             
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 max-w-lg mx-auto lg:mx-0">
               We source carefully, test every product, and present clean 
               nutrition without noise. Because your health deserves honesty.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3 mb-8">
               <Link
                 to="/products"
-                className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-full hover:bg-eneera-deep-green transition-all duration-300 shadow-card hover:shadow-dramatic"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground text-sm font-medium tracking-[0.12em] uppercase rounded-full hover:bg-eneera-deep-green transition-all duration-300 shadow-card hover:shadow-dramatic group"
               >
                 Shop Now
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center px-10 py-4 border border-foreground/20 text-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-full hover:border-primary hover:text-primary transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-3.5 border border-foreground/20 text-foreground text-sm font-medium tracking-[0.12em] uppercase rounded-full hover:border-primary hover:text-primary transition-all duration-300"
               >
                 Our Story
               </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Shield size={16} className="text-primary" />
+                <span>Lab Certified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Leaf size={16} className="text-primary" />
+                <span>100% Organic</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award size={16} className="text-primary" />
+                <span>FSSAI Approved</span>
+              </div>
             </div>
           </div>
 
           {/* Right: Hero Image */}
           <div className="relative">
-            <div className="relative mx-auto max-w-md lg:max-w-lg">
+            <div className="relative mx-auto max-w-sm lg:max-w-md">
               {/* Background circle */}
-              <div className="absolute inset-0 -m-6 rounded-full bg-eneera-linen/60" />
+              <div className="absolute inset-0 -m-4 rounded-full bg-eneera-linen/60" />
               
               {/* Main image */}
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-dramatic">
@@ -67,15 +85,15 @@ export function HeroSection() {
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 md:-left-8 bg-background p-4 md:p-6 rounded-xl shadow-elevated">
-                <p className="font-serif text-3xl md:text-4xl text-primary mb-1">100%</p>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">Lab Tested</p>
+              <div className="absolute -bottom-3 -left-3 md:-left-6 bg-background p-3 md:p-4 rounded-xl shadow-elevated">
+                <p className="font-serif text-2xl md:text-3xl text-primary mb-0.5">100%</p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Lab Tested</p>
               </div>
 
               {/* Floating badge 2 */}
-              <div className="absolute -top-4 -right-4 md:-right-8 bg-background p-4 md:p-5 rounded-xl shadow-elevated">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Certified</p>
-                <p className="font-serif text-xl md:text-2xl text-primary">Organic</p>
+              <div className="absolute -top-3 -right-3 md:-right-6 bg-background p-3 md:p-4 rounded-xl shadow-elevated">
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-0.5">Certified</p>
+                <p className="font-serif text-lg md:text-xl text-primary">Organic</p>
               </div>
             </div>
           </div>

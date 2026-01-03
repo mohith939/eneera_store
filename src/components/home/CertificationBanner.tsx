@@ -11,13 +11,13 @@ const certifications = [
 
 export function CertificationBanner() {
   return (
-    <section className="py-12 bg-primary text-primary-foreground overflow-hidden">
-      <div className="container-full">
-        <div className="flex items-center justify-center gap-8 md:gap-16 flex-wrap">
+    <section className="py-8 md:py-10 bg-primary text-primary-foreground overflow-hidden">
+      <div className="container-wide">
+        <div className="flex items-center justify-center gap-6 md:gap-12 flex-wrap">
           {certifications.map((cert, index) => (
-            <div key={index} className="flex items-center gap-3 opacity-90 hover:opacity-100 transition-opacity">
-              <cert.icon size={24} strokeWidth={1.5} />
-              <span className="text-sm font-medium tracking-wide whitespace-nowrap">
+            <div key={index} className="flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity">
+              <cert.icon size={20} strokeWidth={1.5} />
+              <span className="text-xs md:text-sm font-medium tracking-wide whitespace-nowrap">
                 {cert.label}
               </span>
             </div>

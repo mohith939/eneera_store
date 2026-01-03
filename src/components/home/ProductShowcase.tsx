@@ -151,16 +151,16 @@ export function ProductShowcase() {
   const rightBenefits = product.benefits.filter((b) => b.position === "right");
 
   return (
-    <section className="py-section bg-background relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-background relative overflow-hidden">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-4">
+        <div className="text-center mb-10 md:mb-12">
+          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
             <span className="w-6 h-[1px] bg-primary" />
             Nature's Finest Ingredients
             <span className="w-6 h-[1px] bg-primary" />
           </span>
-          <h2 className="font-serif text-display text-foreground">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">
             {product.name}
           </h2>
         </div>
@@ -170,34 +170,34 @@ export function ProductShowcase() {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-background border border-border shadow-card flex items-center justify-center hover:bg-eneera-cream hover:border-primary transition-all duration-300 group"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background border border-border shadow-card flex items-center justify-center hover:bg-eneera-cream hover:border-primary transition-all duration-300 group"
             aria-label="Previous product"
           >
-            <ChevronLeft size={24} className="text-foreground group-hover:text-primary transition-colors" />
+            <ChevronLeft size={20} className="text-foreground group-hover:text-primary transition-colors" />
           </button>
           
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-background border border-border shadow-card flex items-center justify-center hover:bg-eneera-cream hover:border-primary transition-all duration-300 group"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background border border-border shadow-card flex items-center justify-center hover:bg-eneera-cream hover:border-primary transition-all duration-300 group"
             aria-label="Next product"
           >
-            <ChevronRight size={24} className="text-foreground group-hover:text-primary transition-colors" />
+            <ChevronRight size={20} className="text-foreground group-hover:text-primary transition-colors" />
           </button>
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center px-12 md:px-14">
             {/* Left Benefits */}
-            <div className="lg:col-span-3 space-y-8 order-2 lg:order-1">
+            <div className="lg:col-span-3 space-y-6 order-2 lg:order-1">
               {leftBenefits.map((benefit, index) => (
                 <div
                   key={benefit.title}
                   className="text-right animate-fade-in"
                   style={{ animationDelay: `${index * 0.15}s` }}
                 >
-                  <h4 className="font-serif text-lg md:text-xl text-foreground mb-2 underline underline-offset-4 decoration-primary/50">
+                  <h4 className="font-serif text-base md:text-lg text-foreground mb-1.5 underline underline-offset-4 decoration-primary/50">
                     {benefit.title}
                   </h4>
-                  <ul className="space-y-1">
+                  <ul className="space-y-0.5">
                     {benefit.points.map((point) => (
                       <li
                         key={point}
@@ -213,9 +213,9 @@ export function ProductShowcase() {
 
             {/* Center Product Image */}
             <div className="lg:col-span-6 relative order-1 lg:order-2">
-              <div className="relative max-w-md mx-auto">
+              <div className="relative max-w-sm mx-auto">
                 {/* Decorative circle */}
-                <div className="absolute inset-0 -m-8 rounded-full bg-eneera-cream/50" />
+                <div className="absolute inset-0 -m-6 rounded-full bg-eneera-cream/50" />
                 
                 {/* Product Image */}
                 <div className="relative aspect-square rounded-2xl overflow-hidden shadow-dramatic">
@@ -227,24 +227,24 @@ export function ProductShowcase() {
                 </div>
 
                 {/* Tagline */}
-                <p className="text-center mt-6 text-sm text-primary tracking-wide uppercase font-medium">
+                <p className="text-center mt-4 text-sm text-primary tracking-wide uppercase font-medium">
                   {product.tagline}
                 </p>
               </div>
             </div>
 
             {/* Right Benefits */}
-            <div className="lg:col-span-3 space-y-8 order-3">
+            <div className="lg:col-span-3 space-y-6 order-3">
               {rightBenefits.map((benefit, index) => (
                 <div
                   key={benefit.title}
                   className="text-left animate-fade-in"
                   style={{ animationDelay: `${(index + 2) * 0.15}s` }}
                 >
-                  <h4 className="font-serif text-lg md:text-xl text-foreground mb-2 underline underline-offset-4 decoration-primary/50">
+                  <h4 className="font-serif text-base md:text-lg text-foreground mb-1.5 underline underline-offset-4 decoration-primary/50">
                     {benefit.title}
                   </h4>
-                  <ul className="space-y-1">
+                  <ul className="space-y-0.5">
                     {benefit.points.map((point) => (
                       <li
                         key={point}
@@ -260,14 +260,14 @@ export function ProductShowcase() {
           </div>
 
           {/* Pagination Dots */}
-          <div className="flex items-center justify-center gap-2 mt-12">
+          <div className="flex items-center justify-center gap-2 mt-8">
             {showcaseProducts.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "w-8 bg-primary"
+                    ? "w-6 bg-primary"
                     : "bg-border hover:bg-primary/50"
                 }`}
                 aria-label={`Go to product ${index + 1}`}
@@ -277,10 +277,10 @@ export function ProductShowcase() {
         </div>
 
         {/* CTA Button */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-10">
           <Link
             to="/products"
-            className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-full hover:bg-eneera-deep-green transition-all duration-300 shadow-card hover:shadow-dramatic"
+            className="inline-flex items-center justify-center px-8 py-3.5 bg-primary text-primary-foreground text-sm font-medium tracking-[0.12em] uppercase rounded-full hover:bg-eneera-deep-green transition-all duration-300 shadow-card hover:shadow-dramatic"
           >
             Explore Products
           </Link>
