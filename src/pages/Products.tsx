@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { Star, Grid3X3, LayoutList, ChevronDown, Filter, X } from "lucide-react";
+import { Star, Grid3X3, LayoutList, ChevronDown, X, ShoppingBag, Eye } from "lucide-react";
 
 const categories = [
   { id: "all", label: "All Products", count: 10 },
@@ -41,7 +41,6 @@ const Products = () => {
   const [selectedConcern, setSelectedConcern] = useState(concernParam);
   const [sortBy, setSortBy] = useState("featured");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Filter products
   const filteredProducts = allProducts.filter((product) => {
@@ -99,26 +98,33 @@ const Products = () => {
 
   return (
     <Layout>
-      {/* Clean Header */}
-      <section className="pt-24 pb-8 bg-background border-b border-border">
-        <div className="container-wide">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      {/* Page Header */}
+      <section className="pt-8 pb-6 md:pt-12 md:pb-8 bg-gradient-to-b from-eneera-cream/50 to-background">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
+            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-foreground font-medium">Products</span>
+          </nav>
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
-              <h1 className="font-serif text-3xl md:text-4xl text-foreground">
+              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-2">
                 Shop All Products
               </h1>
-              <p className="text-muted-foreground text-sm mt-1">
+              <p className="text-muted-foreground text-sm md:text-base max-w-md">
                 Carefully sourced. Lab tested. Honestly presented.
               </p>
             </div>
             
-            {/* Sort & View on Desktop */}
-            <div className="flex items-center gap-3">
+            {/* Sort & View Controls */}
+            <div className="flex items-center gap-4">
               <div className="relative">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-background border border-border px-4 py-2 pr-10 rounded-lg text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="appearance-none bg-background border border-border px-4 py-2.5 pr-10 rounded-lg text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20 hover:border-primary/50 transition-colors"
                 >
                   <option value="featured">Featured</option>
                   <option value="newest">Newest</option>
@@ -130,18 +136,20 @@ const Products = () => {
               </div>
 
               {/* View Toggle */}
-              <div className="hidden md:flex items-center gap-1 border border-border rounded-lg p-1">
+              <div className="hidden md:flex items-center border border-border rounded-lg overflow-hidden">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-2 rounded ${viewMode === "grid" ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
+                  className={`p-2.5 transition-colors ${viewMode === "grid" ? "bg-primary text-primary-foreground" : "bg-background hover:bg-muted"}`}
+                  aria-label="Grid view"
                 >
-                  <Grid3X3 size={16} />
+                  <Grid3X3 size={18} />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-2 rounded ${viewMode === "list" ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
+                  className={`p-2.5 transition-colors ${viewMode === "list" ? "bg-primary text-primary-foreground" : "bg-background hover:bg-muted"}`}
+                  aria-label="List view"
                 >
-                  <LayoutList size={16} />
+                  <LayoutList size={18} />
                 </button>
               </div>
             </div>
@@ -149,53 +157,59 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Category Tabs */}
-      <section className="py-4 bg-eneera-cream border-b border-border sticky top-[72px] z-20">
-        <div className="container-wide">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                className={`px-5 py-2 rounded-full text-sm whitespace-nowrap transition-all font-medium ${
-                  selectedCategory === cat.id
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-background text-foreground hover:bg-secondary border border-border"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+      {/* Filter Bar - Sticky */}
+      <section className="sticky top-0 z-30 bg-background border-y border-border shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          {/* Category Tabs */}
+          <div className="py-4 border-b border-border/50">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-1 px-1">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryChange(cat.id)}
+                  className={`px-5 py-2 rounded-full text-sm whitespace-nowrap transition-all font-medium ${
+                    selectedCategory === cat.id
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-muted text-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  {cat.label}
+                  <span className={`ml-1.5 text-xs ${selectedCategory === cat.id ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    ({cat.count})
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Concern Filter Bar */}
-      <section className="py-3 bg-background border-b border-border">
-        <div className="container-wide">
-          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
-            <span className="text-xs font-medium text-muted-foreground whitespace-nowrap uppercase tracking-wide">Shop by:</span>
-            {concerns.map((concern) => (
-              <button
-                key={concern.id}
-                onClick={() => handleConcernChange(concern.id)}
-                className={`px-4 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
-                  selectedConcern === concern.id
-                    ? "bg-eneera-gold text-eneera-charcoal font-medium"
-                    : "bg-muted text-foreground hover:bg-secondary"
-                }`}
-              >
-                {concern.label}
-              </button>
-            ))}
+          {/* Concern Filter */}
+          <div className="py-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
+            <span className="text-xs font-medium text-muted-foreground whitespace-nowrap uppercase tracking-wider">
+              Shop by:
+            </span>
+            <div className="flex items-center gap-2">
+              {concerns.map((concern) => (
+                <button
+                  key={concern.id}
+                  onClick={() => handleConcernChange(concern.id)}
+                  className={`px-4 py-1.5 rounded-full text-xs whitespace-nowrap transition-all border ${
+                    selectedConcern === concern.id
+                      ? "bg-eneera-gold text-eneera-charcoal border-eneera-gold font-medium shadow-sm"
+                      : "bg-background text-foreground border-border hover:border-primary/50"
+                  }`}
+                >
+                  {concern.label}
+                </button>
+              ))}
+            </div>
             
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="ml-2 px-3 py-1.5 text-xs text-destructive hover:text-destructive/80 flex items-center gap-1"
+                className="ml-auto px-3 py-1.5 text-xs text-destructive hover:text-destructive/80 flex items-center gap-1 whitespace-nowrap font-medium"
               >
-                <X size={12} />
-                Clear
+                <X size={14} />
+                Clear All
               </button>
             )}
           </div>
@@ -203,79 +217,116 @@ const Products = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="py-8 md:py-12 bg-background">
-        <div className="container-wide">
+      <section className="py-8 md:py-12 lg:py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           {/* Results count */}
-          <p className="text-sm text-muted-foreground mb-6">
-            Showing <span className="font-medium text-foreground">{sortedProducts.length}</span> products
-          </p>
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <p className="text-sm text-muted-foreground">
+              Showing <span className="font-semibold text-foreground">{sortedProducts.length}</span> products
+            </p>
+          </div>
 
           {/* Products */}
-          <div className={`grid gap-4 md:gap-6 ${
+          <div className={`grid gap-6 md:gap-8 ${
             viewMode === "grid" 
               ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
-              : "grid-cols-1 md:grid-cols-2"
+              : "grid-cols-1 lg:grid-cols-2"
           }`}>
             {sortedProducts.map((product) => (
               <Link
                 key={product.slug}
                 to={`/products/${product.slug}`}
-                className={`group bg-background border border-border rounded-xl overflow-hidden hover:border-primary/30 hover:shadow-card transition-all duration-300 ${
-                  viewMode === "list" ? "flex" : "block"
+                className={`group bg-background rounded-2xl overflow-hidden hover:shadow-elevated transition-all duration-300 border border-border/50 hover:border-primary/20 ${
+                  viewMode === "list" ? "flex gap-6" : "block"
                 }`}
               >
-                <div className={`relative overflow-hidden bg-eneera-cream ${
-                  viewMode === "list" ? "w-40 h-40 flex-shrink-0" : "aspect-square"
+                {/* Image Container */}
+                <div className={`relative overflow-hidden bg-gradient-to-br from-eneera-cream to-eneera-cream/50 ${
+                  viewMode === "list" ? "w-48 h-48 flex-shrink-0 rounded-l-2xl" : "aspect-square"
                 }`}>
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   
-                  {/* Badge */}
-                  {product.badge && (
-                    <span className={`absolute top-2 left-2 px-2.5 py-1 text-[9px] uppercase tracking-wider font-semibold rounded-full ${
-                      product.badge === "Bestseller" 
-                        ? "bg-primary text-primary-foreground"
-                        : product.badge === "New"
-                        ? "bg-eneera-gold text-eneera-charcoal"
-                        : "bg-eneera-charcoal text-white"
-                    }`}>
-                      {product.badge}
-                    </span>
-                  )}
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                    {product.badge && (
+                      <span className={`px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-full ${
+                        product.badge === "Bestseller" 
+                          ? "bg-primary text-primary-foreground"
+                          : product.badge === "New"
+                          ? "bg-eneera-gold text-eneera-charcoal"
+                          : "bg-eneera-charcoal text-white"
+                      }`}>
+                        {product.badge}
+                      </span>
+                    )}
+                  </div>
 
                   {/* Discount Badge */}
                   {product.originalPrice > product.price && (
-                    <span className="absolute top-2 right-2 px-2 py-1 bg-destructive text-white text-[9px] font-bold rounded-full">
-                      {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
+                    <span className="absolute top-3 right-3 px-2 py-1 bg-destructive text-white text-[10px] font-bold rounded-full shadow-md">
+                      -{Math.round((1 - product.price / product.originalPrice) * 100)}%
                     </span>
                   )}
+
+                  {/* Hover Actions */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                      <button 
+                        className="flex-1 py-2.5 bg-background text-foreground text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center gap-1.5"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <ShoppingBag size={14} />
+                        Add
+                      </button>
+                      <button 
+                        className="py-2.5 px-3 bg-background/90 text-foreground rounded-full hover:bg-background transition-colors"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <Eye size={14} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
-                <div className={`p-4 ${viewMode === "list" ? "flex-1 flex flex-col justify-center" : ""}`}>
+                {/* Content */}
+                <div className={`p-4 md:p-5 ${viewMode === "list" ? "flex-1 flex flex-col justify-center py-6" : ""}`}>
                   {/* Rating */}
-                  <div className="flex items-center gap-1 mb-1.5">
-                    <Star size={12} className="fill-eneera-gold text-eneera-gold" />
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <div className="flex items-center gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          size={12} 
+                          className={i < Math.floor(product.rating) ? "fill-eneera-gold text-eneera-gold" : "text-border"} 
+                        />
+                      ))}
+                    </div>
                     <span className="text-xs font-medium text-foreground">{product.rating}</span>
-                    <span className="text-[10px] text-muted-foreground">({product.reviews})</span>
+                    <span className="text-[11px] text-muted-foreground">({product.reviews})</span>
                   </div>
 
-                  <h3 className="font-serif text-sm md:text-base text-foreground mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
+                  <h3 className="font-serif text-base md:text-lg text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
                     {product.name}
                   </h3>
-                  <p className="text-[11px] text-muted-foreground mb-2 line-clamp-1">{product.tagline}</p>
+                  <p className="text-xs text-muted-foreground mb-3 line-clamp-1">{product.tagline}</p>
                   
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-foreground text-sm">₹{product.price}</span>
+                    <span className="font-bold text-foreground text-lg">₹{product.price}</span>
                     {product.originalPrice > product.price && (
-                      <span className="text-xs text-muted-foreground line-through">₹{product.originalPrice}</span>
+                      <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice}</span>
                     )}
                   </div>
 
                   {viewMode === "list" && (
-                    <button className="mt-3 px-4 py-2 bg-primary text-primary-foreground text-xs uppercase tracking-wider font-medium rounded-full hover:bg-eneera-deep-green transition-colors w-fit">
+                    <button 
+                      className="mt-4 px-6 py-2.5 bg-primary text-primary-foreground text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-eneera-deep-green transition-colors w-fit flex items-center gap-2"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <ShoppingBag size={14} />
                       Add to Cart
                     </button>
                   )}
@@ -287,16 +338,20 @@ const Products = () => {
       </section>
 
       {/* Trust Banner */}
-      <section className="py-8 bg-primary text-primary-foreground">
-        <div className="container-wide">
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-center">
-            <span className="text-xs tracking-wider uppercase">FSSAI Certified</span>
-            <span className="w-1 h-1 rounded-full bg-primary-foreground/40" />
-            <span className="text-xs tracking-wider uppercase">Lab Tested</span>
-            <span className="w-1 h-1 rounded-full bg-primary-foreground/40" />
-            <span className="text-xs tracking-wider uppercase">100% Organic</span>
-            <span className="w-1 h-1 rounded-full bg-primary-foreground/40" />
-            <span className="text-xs tracking-wider uppercase">Free Shipping 500+</span>
+      <section className="py-10 md:py-12 bg-primary text-primary-foreground">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+            {[
+              { label: "FSSAI Certified", sublabel: "Government Approved" },
+              { label: "Lab Tested", sublabel: "Quality Assured" },
+              { label: "100% Organic", sublabel: "No Chemicals" },
+              { label: "Free Shipping", sublabel: "Orders ₹500+" },
+            ].map((item, i) => (
+              <div key={i} className="space-y-1">
+                <p className="text-sm md:text-base font-semibold tracking-wide">{item.label}</p>
+                <p className="text-xs text-primary-foreground/70">{item.sublabel}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
