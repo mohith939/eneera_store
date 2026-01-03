@@ -7,7 +7,7 @@ const featuredProducts = [
     tagline: "Unprocessed. Wild-harvested.",
     price: 649,
     originalPrice: 799,
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&h=600&fit=crop",
     slug: "raw-forest-honey",
     badge: "Bestseller",
   },
@@ -42,16 +42,16 @@ const featuredProducts = [
 
 export function FeaturedProducts() {
   return (
-    <section id="featured-products" className="py-section bg-background">
+    <section id="featured-products" className="py-12 md:py-16 bg-background">
       <div className="container-wide">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-4">
+            <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
               <span className="w-6 h-[1px] bg-primary" />
               Our Bestsellers
             </span>
-            <h2 className="font-serif text-heading text-foreground">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">
               Shop Our Products
             </h2>
           </div>
@@ -73,7 +73,7 @@ export function FeaturedProducts() {
               to={`/products/${product.slug}`}
               className="group block"
             >
-              <div className="relative aspect-square rounded-lg overflow-hidden bg-eneera-cream mb-4">
+              <div className="relative aspect-square rounded-lg overflow-hidden bg-eneera-cream mb-3">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -95,7 +95,7 @@ export function FeaturedProducts() {
                 </div>
               </div>
 
-              <h3 className="font-serif text-base md:text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
+              <h3 className="font-serif text-sm md:text-base text-foreground mb-1 group-hover:text-primary transition-colors">
                 {product.name}
               </h3>
               <p className="text-xs text-muted-foreground mb-2">{product.tagline}</p>

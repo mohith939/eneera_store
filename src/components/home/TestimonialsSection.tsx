@@ -48,70 +48,70 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="py-section bg-background">
+    <section className="py-12 md:py-16 bg-background">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-4">
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
             <span className="w-6 h-[1px] bg-primary" />
             Customer Love
             <span className="w-6 h-[1px] bg-primary" />
           </span>
-          <h2 className="font-serif text-heading text-foreground mb-4">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-2">
             What Our Customers Say
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Real stories from our ENEERA family
           </p>
         </div>
 
         {/* Testimonials Carousel */}
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-3xl mx-auto">
           {/* Navigation */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-12 h-12 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-8 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
           >
-            <ChevronLeft size={24} className="text-foreground" />
+            <ChevronLeft size={20} className="text-foreground" />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-12 h-12 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-8 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
           >
-            <ChevronRight size={24} className="text-foreground" />
+            <ChevronRight size={20} className="text-foreground" />
           </button>
 
           {/* Testimonial Card */}
-          <div className="bg-eneera-cream rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
+          <div className="bg-eneera-cream rounded-2xl p-6 md:p-10 text-center relative overflow-hidden">
             {/* Quote Icon */}
-            <Quote className="absolute top-8 left-8 w-12 h-12 text-primary/10" />
+            <Quote className="absolute top-6 left-6 w-10 h-10 text-primary/10" />
 
             {/* Content */}
             <div className="relative z-10">
               {/* Rating */}
-              <div className="flex items-center justify-center gap-1 mb-6">
+              <div className="flex items-center justify-center gap-1 mb-4">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} size={20} className="fill-eneera-gold text-eneera-gold" />
+                  <Star key={i} size={18} className="fill-eneera-gold text-eneera-gold" />
                 ))}
               </div>
 
               {/* Text */}
-              <p className="font-serif text-xl md:text-2xl text-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
+              <p className="font-serif text-lg md:text-xl text-foreground leading-relaxed mb-6 max-w-xl mx-auto">
                 "{testimonials[currentIndex].text}"
               </p>
 
               {/* Author */}
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-3">
                 <img
                   src={testimonials[currentIndex].image}
                   alt={testimonials[currentIndex].name}
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-12 h-12 rounded-full object-cover"
                 />
                 <div className="text-left">
-                  <p className="font-medium text-foreground">
+                  <p className="font-medium text-foreground text-sm">
                     {testimonials[currentIndex].name}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {testimonials[currentIndex].location} • {testimonials[currentIndex].product}
                   </p>
                 </div>
@@ -120,14 +120,14 @@ export function TestimonialsSection() {
           </div>
 
           {/* Dots */}
-          <div className="flex items-center justify-center gap-2 mt-8">
+          <div className="flex items-center justify-center gap-2 mt-6">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? "w-8 bg-primary"
+                    ? "w-6 bg-primary"
                     : "bg-border hover:bg-muted-foreground"
                 }`}
               />

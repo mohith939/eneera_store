@@ -18,25 +18,10 @@ const processSteps = [
 
 export function ProcessSection() {
   return (
-    <section className="py-section bg-background">
+    <section className="py-12 md:py-16 bg-background">
       <div className="container-wide">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-4">
-            <span className="w-6 h-[1px] bg-primary" />
-            Our Process
-            <span className="w-6 h-[1px] bg-primary" />
-          </span>
-          <h2 className="font-serif text-heading text-foreground mb-4">
-            Your Assurance, Our Process
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
-            From source to shelf, every step is designed to preserve nature's goodness.
-          </p>
-        </div>
-
         {/* Process Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {processSteps.map((step, index) => (
             <div key={index} className="group relative overflow-hidden rounded-xl">
               <div className="aspect-[4/3] overflow-hidden">
@@ -47,11 +32,11 @@ export function ProcessSection() {
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-eneera-charcoal/80 via-eneera-charcoal/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-serif text-lg text-white mb-1">
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <h3 className="font-serif text-base md:text-lg text-white mb-1">
                   {step.title}
                 </h3>
-                <p className="text-sm text-white/80">
+                <p className="text-xs md:text-sm text-white/80">
                   {step.description}
                 </p>
               </div>

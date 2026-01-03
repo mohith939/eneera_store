@@ -57,7 +57,7 @@ export function HeroSection() {
               {/* Main image */}
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-dramatic">
                 <img
-                  src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&h=750&fit=crop"
+                  src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&h=750&fit=crop"
                   alt="ENEERA Premium Organic Products"
                   className="w-full h-full object-cover"
                 />

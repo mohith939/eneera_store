@@ -3,33 +3,33 @@ import { ArrowRight } from "lucide-react";
 
 export function CTASection() {
   return (
-    <section className="relative py-section overflow-hidden">
+    <section className="relative py-16 md:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-eneera-deep-green" />
       
-      {/* Decorative patterns */}
+      {/* Decorative patterns - smaller */}
       <div 
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, hsl(var(--eneera-gold) / 0.3), transparent 70%)`,
         }}
       />
-      <div className="absolute top-10 left-10 w-32 h-32 rounded-full border border-primary-foreground/10" />
-      <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full border border-primary-foreground/10" />
-      <div className="absolute top-1/2 left-1/4 w-20 h-20 rounded-full bg-eneera-gold/10" />
+      <div className="absolute top-8 left-8 w-20 h-20 rounded-full border border-primary-foreground/10" />
+      <div className="absolute bottom-8 right-8 w-32 h-32 rounded-full border border-primary-foreground/10" />
+      <div className="absolute top-1/2 left-1/4 w-12 h-12 rounded-full bg-eneera-gold/10" />
 
       <div className="container-narrow relative text-center text-primary-foreground">
-        <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-8">
+        <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-6">
           <span className="w-6 h-[1px] bg-primary-foreground/30" />
           Begin Your Journey
           <span className="w-6 h-[1px] bg-primary-foreground/30" />
         </span>
 
-        <h2 className="font-serif text-display text-primary-foreground mb-6">
+        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-4">
           Experience clean nutrition.
         </h2>
         
-        <p className="text-lg md:text-xl text-primary-foreground/70 mb-12 max-w-lg mx-auto leading-relaxed">
+        <p className="text-base md:text-lg text-primary-foreground/70 mb-8 max-w-lg mx-auto leading-relaxed">
           Browse our carefully curated selection of premium organic products. 
           Each one chosen for its purity and quality.
         </p>
@@ -53,16 +53,16 @@ export function CTASection() {
         </div>
 
         {/* Trust badge */}
-        <div className="mt-16 inline-flex items-center gap-4 px-6 py-3 border border-primary-foreground/20 text-primary-foreground/60">
-          <span className="text-[11px] tracking-[0.15em] uppercase">
+        <div className="mt-10 inline-flex items-center gap-4 px-5 py-2 border border-primary-foreground/20 text-primary-foreground/60">
+          <span className="text-[10px] tracking-[0.15em] uppercase">
             India-Wide Delivery
           </span>
-          <span className="w-[1px] h-4 bg-primary-foreground/20" />
-          <span className="text-[11px] tracking-[0.15em] uppercase">
+          <span className="w-[1px] h-3 bg-primary-foreground/20" />
+          <span className="text-[10px] tracking-[0.15em] uppercase">
             Secure Payments
           </span>
-          <span className="w-[1px] h-4 bg-primary-foreground/20" />
-          <span className="text-[11px] tracking-[0.15em] uppercase">
+          <span className="w-[1px] h-3 bg-primary-foreground/20" />
+          <span className="text-[10px] tracking-[0.15em] uppercase">
             Quality Guaranteed
           </span>
         </div>
