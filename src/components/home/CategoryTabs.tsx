@@ -63,22 +63,22 @@ export function CategoryTabs() {
   };
 
   return (
-    <section className="py-section bg-eneera-linen">
+    <section className="py-14 md:py-20 bg-eneera-linen">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-4">
+        <div className="text-center mb-8 md:mb-10">
+          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
             <span className="w-6 h-[1px] bg-primary" />
             Shop by Category
             <span className="w-6 h-[1px] bg-primary" />
           </span>
-          <h2 className="font-serif text-heading text-foreground">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">
             Explore Our Range
           </h2>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex items-center justify-center gap-2 md:gap-4 mb-12 flex-wrap">
+        <div className="flex items-center justify-center gap-2 md:gap-3 mb-8 md:mb-10 flex-wrap">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -86,7 +86,7 @@ export function CategoryTabs() {
                 setActiveCategory(cat.id);
                 setScrollPosition(0);
               }}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
                 activeCategory === cat.id
                   ? "bg-primary text-primary-foreground shadow-soft"
                   : "bg-background text-foreground hover:bg-secondary border border-border"
@@ -105,20 +105,20 @@ export function CategoryTabs() {
               <button
                 onClick={() => scrollProducts('left')}
                 disabled={!canScrollLeft}
-                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-elevated flex items-center justify-center transition-all ${
+                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 w-10 h-10 rounded-full bg-background shadow-elevated flex items-center justify-center transition-all ${
                   canScrollLeft ? "opacity-100 hover:scale-110" : "opacity-0 pointer-events-none"
                 }`}
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} />
               </button>
               <button
                 onClick={() => scrollProducts('right')}
                 disabled={!canScrollRight}
-                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-background shadow-elevated flex items-center justify-center transition-all ${
+                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 w-10 h-10 rounded-full bg-background shadow-elevated flex items-center justify-center transition-all ${
                   canScrollRight ? "opacity-100 hover:scale-110" : "opacity-0 pointer-events-none"
                 }`}
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} />
               </button>
             </>
           )}
@@ -126,16 +126,16 @@ export function CategoryTabs() {
           {/* Products Grid */}
           <div className="overflow-hidden">
             <div 
-              className="flex gap-6 transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${scrollPosition * (100 / 4 + 6)}%)` }}
+              className="flex gap-5 transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${scrollPosition * (100 / 4 + 5)}%)` }}
             >
               {products.map((product, index) => (
                 <Link
                   key={`${product.slug}-${index}`}
                   to={`/products/${product.slug}`}
-                  className="group flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+                  className="group flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
                 >
-                  <div className="relative aspect-square rounded-xl overflow-hidden bg-background mb-4 shadow-soft group-hover:shadow-card transition-shadow duration-300">
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-background mb-3 shadow-soft group-hover:shadow-card transition-shadow duration-300">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -144,37 +144,37 @@ export function CategoryTabs() {
                     
                     {/* Badge */}
                     {product.badge && (
-                      <span className="absolute top-3 left-3 px-3 py-1 bg-primary text-primary-foreground text-[10px] uppercase tracking-wider font-medium rounded-full">
+                      <span className="absolute top-2 left-2 px-2.5 py-1 bg-primary text-primary-foreground text-[10px] uppercase tracking-wider font-medium rounded-full">
                         {product.badge}
                       </span>
                     )}
 
                     {/* Discount Badge */}
                     {product.originalPrice > product.price && (
-                      <span className="absolute top-3 right-3 px-2 py-1 bg-eneera-gold text-eneera-charcoal text-[10px] font-bold rounded-full">
+                      <span className="absolute top-2 right-2 px-2 py-1 bg-eneera-gold text-eneera-charcoal text-[10px] font-bold rounded-full">
                         {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
                       </span>
                     )}
 
                     {/* Quick Add */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-eneera-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="w-full py-2.5 bg-background text-foreground text-xs uppercase tracking-wider font-medium rounded-full hover:bg-primary hover:text-primary-foreground transition-colors">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-eneera-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <button className="w-full py-2 bg-background text-foreground text-xs uppercase tracking-wider font-medium rounded-full hover:bg-primary hover:text-primary-foreground transition-colors">
                         Quick View
                       </button>
                     </div>
                   </div>
 
                   {/* Rating */}
-                  <div className="flex items-center gap-1 mb-2">
-                    <Star size={14} className="fill-eneera-gold text-eneera-gold" />
-                    <span className="text-sm font-medium text-foreground">{product.rating}</span>
-                    <span className="text-xs text-muted-foreground">({product.reviews} reviews)</span>
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <Star size={12} className="fill-eneera-gold text-eneera-gold" />
+                    <span className="text-xs font-medium text-foreground">{product.rating}</span>
+                    <span className="text-[10px] text-muted-foreground">({product.reviews})</span>
                   </div>
 
-                  <h3 className="font-serif text-base md:text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
+                  <h3 className="font-serif text-sm md:text-base text-foreground mb-0.5 group-hover:text-primary transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-muted-foreground mb-2">{product.tagline}</p>
+                  <p className="text-[11px] text-muted-foreground mb-1.5">{product.tagline}</p>
                   
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-foreground">₹{product.price}</span>

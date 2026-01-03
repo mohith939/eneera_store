@@ -48,16 +48,16 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section className="py-14 md:py-20 bg-background">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-3">
+        <div className="text-center mb-8 md:mb-10">
+          <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase text-primary mb-2">
             <span className="w-6 h-[1px] bg-primary" />
             Customer Love
             <span className="w-6 h-[1px] bg-primary" />
           </span>
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-2">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-1">
             What Our Customers Say
           </h2>
           <p className="text-muted-foreground text-sm">
@@ -70,33 +70,33 @@ export function TestimonialsSection() {
           {/* Navigation */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-8 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
           >
-            <ChevronLeft size={20} className="text-foreground" />
+            <ChevronLeft size={18} className="text-foreground" />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-8 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 w-10 h-10 rounded-full bg-eneera-cream flex items-center justify-center shadow-soft hover:shadow-card transition-shadow z-10"
           >
-            <ChevronRight size={20} className="text-foreground" />
+            <ChevronRight size={18} className="text-foreground" />
           </button>
 
           {/* Testimonial Card */}
-          <div className="bg-eneera-cream rounded-2xl p-6 md:p-10 text-center relative overflow-hidden">
+          <div className="bg-eneera-cream rounded-2xl p-6 md:p-8 text-center relative overflow-hidden">
             {/* Quote Icon */}
-            <Quote className="absolute top-6 left-6 w-10 h-10 text-primary/10" />
+            <Quote className="absolute top-4 left-4 w-8 h-8 text-primary/10" />
 
             {/* Content */}
             <div className="relative z-10">
               {/* Rating */}
-              <div className="flex items-center justify-center gap-1 mb-4">
+              <div className="flex items-center justify-center gap-1 mb-3">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} size={18} className="fill-eneera-gold text-eneera-gold" />
+                  <Star key={i} size={16} className="fill-eneera-gold text-eneera-gold" />
                 ))}
               </div>
 
               {/* Text */}
-              <p className="font-serif text-lg md:text-xl text-foreground leading-relaxed mb-6 max-w-xl mx-auto">
+              <p className="font-serif text-lg md:text-xl text-foreground leading-relaxed mb-5 max-w-xl mx-auto">
                 "{testimonials[currentIndex].text}"
               </p>
 
@@ -105,7 +105,7 @@ export function TestimonialsSection() {
                 <img
                   src={testimonials[currentIndex].image}
                   alt={testimonials[currentIndex].name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div className="text-left">
                   <p className="font-medium text-foreground text-sm">
@@ -120,7 +120,7 @@ export function TestimonialsSection() {
           </div>
 
           {/* Dots */}
-          <div className="flex items-center justify-center gap-2 mt-6">
+          <div className="flex items-center justify-center gap-2 mt-5">
             {testimonials.map((_, index) => (
               <button
                 key={index}
