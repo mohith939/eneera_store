@@ -19,8 +19,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "DM Sans", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Outfit", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -69,11 +69,14 @@ export default {
         eneera: {
           ivory: "hsl(var(--eneera-ivory))",
           cream: "hsl(var(--eneera-cream))",
-          sage: "hsl(var(--eneera-sage))",
-          "sage-light": "hsl(var(--eneera-sage-light))",
-          stone: "hsl(var(--eneera-stone))",
+          linen: "hsl(var(--eneera-linen))",
+          forest: "hsl(var(--eneera-forest))",
+          "forest-light": "hsl(var(--eneera-forest-light))",
+          gold: "hsl(var(--eneera-gold))",
+          "gold-light": "hsl(var(--eneera-gold-light))",
           charcoal: "hsl(var(--eneera-charcoal))",
           "warm-grey": "hsl(var(--eneera-warm-grey))",
+          "deep-green": "hsl(var(--eneera-deep-green))",
         },
       },
       borderRadius: {
@@ -85,6 +88,8 @@ export default {
         soft: "var(--shadow-soft)",
         card: "var(--shadow-card)",
         elevated: "var(--shadow-elevated)",
+        dramatic: "var(--shadow-dramatic)",
+        glow: "var(--shadow-glow)",
       },
       keyframes: {
         "accordion-down": {
@@ -100,28 +105,66 @@ export default {
           to: { opacity: "1" },
         },
         fadeInUp: {
-          from: { opacity: "0", transform: "translateY(20px)" },
+          from: { opacity: "0", transform: "translateY(40px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        fadeInScale: {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
         slideIn: {
-          from: { opacity: "0", transform: "translateX(-10px)" },
+          from: { opacity: "0", transform: "translateX(-20px)" },
           to: { opacity: "1", transform: "translateX(0)" },
+        },
+        slideInRight: {
+          from: { opacity: "0", transform: "translateX(20px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        pulseGlow: {
+          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.2)" },
+          "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.4)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-        "fade-in-up": "fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-        "slide-in": "slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+        "fade-in": "fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-in-up": "fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-in-scale": "fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "slide-in": "slideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "slide-in-right": "slideInRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        marquee: "marquee 30s linear infinite",
+        float: "float 4s ease-in-out infinite",
+        shimmer: "shimmer 2s linear infinite",
+        "pulse-glow": "pulseGlow 3s ease-in-out infinite",
       },
       spacing: {
-        section: "clamp(4rem, 8vw, 8rem)",
+        section: "clamp(5rem, 12vw, 10rem)",
+        "section-sm": "clamp(3rem, 8vw, 6rem)",
       },
       letterSpacing: {
-        wide: "0.08em",
-        wider: "0.12em",
+        tight: "-0.02em",
+        wide: "0.05em",
+        wider: "0.1em",
         widest: "0.2em",
+        ultra: "0.3em",
+      },
+      fontSize: {
+        "display-xl": ["clamp(3.5rem, 10vw, 8rem)", { lineHeight: "1", letterSpacing: "-0.02em" }],
+        "display": ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "heading": ["clamp(1.75rem, 4vw, 3rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
       },
     },
   },
