@@ -1,127 +1,198 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingBag } from "lucide-react";
-import { PromoCarousel } from "../home/PromoCarousel";
+import { Menu, X, Search, User, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Products", path: "/products" },
-  { label: "About", path: "/about" },
+  { label: "Shop", path: "/products" },
+  { label: "About Us", path: "/about" },
   { label: "Quality", path: "/quality" },
   { label: "Contact", path: "/contact" },
+];
+
+const promoMessages = [
+  "Free Shipping on orders over ₹750",
+  "New Launch: Premium Forest Honey",
+  "100% Organic • Lab Certified • Pure",
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentPromo, setCurrentPromo] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPromo((prev) => (prev + 1) % promoMessages.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <>
-      {/* Promo Carousel - Fixed at top */}
-      <div className="fixed top-0 left-0 right-0 z-[60]">
-        <PromoCarousel />
+      {/* Top Promo Bar */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground">
+        <div className="relative h-10 flex items-center justify-center overflow-hidden">
+          {/* Prev Arrow */}
+          <button
+            onClick={() => setCurrentPromo((prev) => (prev - 1 + promoMessages.length) % promoMessages.length)}
+            className="absolute left-4 p-1 hover:bg-white/10 rounded transition-colors"
+            aria-label="Previous promotion"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          {/* Promo Text */}
+          <div className="text-center">
+            <p className="text-xs md:text-sm tracking-wide animate-fade-in" key={currentPromo}>
+              {promoMessages[currentPromo]}
+            </p>
+          </div>
+
+          {/* Next Arrow */}
+          <button
+            onClick={() => setCurrentPromo((prev) => (prev + 1) % promoMessages.length)}
+            className="absolute right-4 p-1 hover:bg-white/10 rounded transition-colors"
+            aria-label="Next promotion"
+          >
+            <ChevronRight size={16} />
+          </button>
+
+          {/* Dots indicator */}
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1.5">
+            {promoMessages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPromo(index)}
+                className={`w-1 h-1 rounded-full transition-all ${
+                  index === currentPromo ? "bg-white" : "bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Main Header */}
       <header
-        className={`fixed top-10 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/95 backdrop-blur-xl shadow-soft"
-            : "bg-transparent"
+            ? "bg-background/98 backdrop-blur-md shadow-soft py-2"
+            : "bg-background py-3"
         }`}
       >
         <nav className="container-wide">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="relative group"
-            >
-              <span className="font-serif text-2xl md:text-3xl tracking-[0.1em] text-foreground">
-                ENEERA
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-eneera-gold group-hover:w-full transition-all duration-500" />
-            </Link>
-
-            {/* Desktop Navigation */}
-            <ul className="hidden lg:flex items-center gap-12">
-              {navItems.map((item) => (
+          <div className="flex items-center justify-between h-14 md:h-16">
+            {/* Left Navigation */}
+            <ul className="hidden lg:flex items-center gap-8">
+              {navItems.slice(0, 2).map((item) => (
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className={`relative text-[13px] font-medium tracking-[0.12em] uppercase transition-colors duration-300 ${
+                    className={`text-[13px] font-medium tracking-wide uppercase transition-colors duration-200 ${
                       isActive(item.path)
                         ? "text-primary"
-                        : "text-foreground/70 hover:text-foreground"
+                        : "text-foreground hover:text-primary"
                     }`}
                   >
                     {item.label}
-                    {isActive(item.path) && (
-                      <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary" />
-                    )}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            {/* Right side */}
-            <div className="flex items-center gap-6">
-              {/* Cart Icon (placeholder) */}
-              <button className="hidden md:flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors">
-                <ShoppingBag size={20} strokeWidth={1.5} />
-                <span className="text-xs tracking-wider uppercase font-medium">Cart</span>
-              </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+            </button>
 
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
-              </button>
+            {/* Center Logo */}
+            <Link
+              to="/"
+              className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0"
+            >
+              <span className="font-serif text-2xl md:text-3xl tracking-[0.15em] text-foreground hover:text-primary transition-colors">
+                ENEERA
+              </span>
+            </Link>
+
+            {/* Right Navigation */}
+            <div className="flex items-center gap-6">
+              <ul className="hidden lg:flex items-center gap-8">
+                {navItems.slice(2).map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className={`text-[13px] font-medium tracking-wide uppercase transition-colors duration-200 ${
+                        isActive(item.path)
+                          ? "text-primary"
+                          : "text-foreground hover:text-primary"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Icons */}
+              <div className="flex items-center gap-4">
+                <button className="hidden md:block text-foreground hover:text-primary transition-colors" aria-label="Search">
+                  <Search size={20} strokeWidth={1.5} />
+                </button>
+                <button className="hidden md:block text-foreground hover:text-primary transition-colors" aria-label="Account">
+                  <User size={20} strokeWidth={1.5} />
+                </button>
+                <button className="text-foreground hover:text-primary transition-colors relative" aria-label="Cart">
+                  <ShoppingBag size={20} strokeWidth={1.5} />
+                </button>
+              </div>
             </div>
           </div>
         </nav>
 
         {/* Mobile Navigation */}
         <div
-          className={`lg:hidden fixed inset-0 top-[calc(2.5rem+5rem)] bg-background z-40 transition-all duration-500 ${
+          className={`lg:hidden fixed inset-0 top-[6.5rem] bg-background z-40 transition-all duration-300 ${
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           }`}
         >
-          <div className="container-wide py-12">
+          <div className="container-wide py-8">
             <ul className="space-y-1">
-              {navItems.map((item, index) => (
-                <li
-                  key={item.path}
-                  className={`transform transition-all duration-500 ${
-                    isMenuOpen
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-8"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? `${index * 0.08}s` : "0s" }}
+              <li className="border-b border-border/30">
+                <Link
+                  to="/"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block py-4 text-lg font-medium text-foreground hover:text-primary transition-colors"
                 >
+                  Home
+                </Link>
+              </li>
+              {navItems.map((item) => (
+                <li key={item.path} className="border-b border-border/30">
                   <Link
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block py-4 font-serif text-3xl tracking-wide transition-colors border-b border-border/30 ${
+                    className={`block py-4 text-lg font-medium transition-colors ${
                       isActive(item.path)
                         ? "text-primary"
-                        : "text-foreground/80 hover:text-foreground hover:pl-4"
+                        : "text-foreground hover:text-primary"
                     }`}
                   >
                     {item.label}
@@ -129,21 +200,6 @@ export function Header() {
                 </li>
               ))}
             </ul>
-
-            {/* Mobile cart */}
-            <div
-              className={`mt-12 transform transition-all duration-500 ${
-                isMenuOpen
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: isMenuOpen ? "0.4s" : "0s" }}
-            >
-              <button className="flex items-center gap-3 text-foreground/70 hover:text-foreground transition-colors">
-                <ShoppingBag size={22} strokeWidth={1.5} />
-                <span className="text-sm tracking-wider uppercase font-medium">Shopping Cart</span>
-              </button>
-            </div>
           </div>
         </div>
       </header>
