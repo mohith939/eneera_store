@@ -1,8 +1,8 @@
-import { Award, Leaf, Shield, CheckCircle, FlaskConical, BadgeCheck } from "lucide-react";
+import { Moon, Star, Shield, CheckCircle, FlaskConical, BadgeCheck } from "lucide-react";
 
 const certifications = [
-  { icon: Award, label: "FSSAI Certified" },
-  { icon: Leaf, label: "100% Organic" },
+  { icon: Moon, label: "FSSAI Certified" },
+  { icon: Star, label: "100% Organic" },
   { icon: Shield, label: "ISO Certified" },
   { icon: CheckCircle, label: "Non-GMO" },
   { icon: FlaskConical, label: "Lab Tested" },
