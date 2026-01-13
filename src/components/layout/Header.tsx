@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Search, User, ShoppingBag, ChevronLeft, ChevronRight, ChevronDown, Sparkles } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useCart } from "@/hooks/useCart";
+import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
   { 
@@ -36,17 +38,17 @@ export function Header() {
   const [currentPromo, setCurrentPromo] = useState(0);
   const [showShopDropdown, setShowShopDropdown] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { totalItems } = useCart();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Determine scroll direction
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down & past threshold - hide navbar
         setIsVisible(false);
       } else {
-        // Scrolling up - show navbar
         setIsVisible(true);
       }
       
@@ -79,17 +81,11 @@ export function Header() {
   };
 
   const handleAccount = () => {
-    toast({
-      title: "Account",
-      description: "Account login coming soon!",
-    });
+    navigate(isAuthenticated ? '/profile' : '/login');
   };
 
   const handleCart = () => {
-    toast({
-      title: "Cart",
-      description: "Shopping cart coming soon!",
-    });
+    navigate('/cart');
   };
 
   return (
@@ -283,7 +279,7 @@ export function Header() {
                 >
                   <ShoppingBag size={18} strokeWidth={1.5} />
                   <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-primary text-primary-foreground text-[9px] rounded-full flex items-center justify-center">
-                    0
+                    {totalItems}
                   </span>
                 </button>
               </div>
